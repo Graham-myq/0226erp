@@ -40,6 +40,8 @@ public class UserRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("loginname", token.getPrincipal().toString());
+
+
         User user = userService.getOne(queryWrapper);
         if (null != user) {
             ActiverUser activerUser = new ActiverUser();
@@ -47,7 +49,7 @@ public class UserRealm extends AuthorizingRealm {
             ByteSource credentialsSalt = ByteSource.Util.bytes(user.getSalt());
             SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(activerUser, user.getPwd(), credentialsSalt,
                     this.getName());
-            System.out.println("========================"+info);
+            System.out.println("============2222============"+info);
             return info;
         }
         return null;
