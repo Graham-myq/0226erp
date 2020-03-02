@@ -3,6 +3,8 @@ package com.sxt.sys.controller;
 
 import java.util.Date;
 
+import com.sxt.sys.domain.Loginfo;
+import com.sxt.sys.service.LoginfoService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -29,6 +31,9 @@ import com.sxt.sys.common.WebUtils;
 @RequestMapping("login")
 public class LoginController {
 
+    @Autowired
+    private LoginfoService loginfoService;
+
 
 
     @RequestMapping("login")
@@ -39,7 +44,12 @@ public class LoginController {
             subject.login(token);
             ActiverUser activerUser=(ActiverUser) subject.getPrincipal();
             WebUtils.getSession().setAttribute("user", activerUser.getUser());
-
+            //记录登录日志
+            Loginfo entity = new Loginfo();
+            entity.setLoginname(activerUser.getUser().getName()+"-"+activerUser.getUser().getLoginname());
+            entity.setLoginip(WebUtils.getRequest().getRemoteAddr());
+            entity.setLogintime(new Date());
+            loginfoService.save(entity);
             return ResultObj.LOGIN_SUCCESS;
         } catch (AuthenticationException e) {
             e.printStackTrace();

@@ -19,7 +19,7 @@ spring:
       stat-view-servlet:
         enabled: true
         login-username: root
-        login-password: 123456
+        login-password: root
         allow:
         deny:
         url-pattern: /druid/*
@@ -33,6 +33,7 @@ spring:
 
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
 #配置mybatisplus
 mybatis-plus:
   mapper-locations:
