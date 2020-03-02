@@ -34,7 +34,7 @@ public class NoticeController {
     @Autowired
     private NoticeService noticeService;
     /**
-     * 查询
+     * 查询公告
      */
     @RequestMapping("loadAllNotice")
     public DataGridView loadAllNotice(NoticeVo noticeVo){
