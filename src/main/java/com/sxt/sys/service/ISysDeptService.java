@@ -1,6 +1,6 @@
 package com.sxt.sys.service;
 
-import com.sxt.sys.pojo.SysDept;
+import com.sxt.sys.domain.SysDept;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

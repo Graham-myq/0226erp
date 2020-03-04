@@ -3,7 +3,7 @@
 <mapper namespace="com.sxt.sys.mapper.SysDeptMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.sxt.sys.pojo.SysDept">
+    <resultMap id="BaseResultMap" type="com.sxt.sys.domain.SysDept">
         <id column="id" property="id" />
         <result column="pid" property="pid" />
         <result column="title" property="title" />

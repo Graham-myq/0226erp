@@ -1,6 +1,6 @@
 package com.sxt.sys.mapper;
 
-import com.sxt.sys.pojo.SysDept;
+import com.sxt.sys.domain.SysDept;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

@@ -31,4 +31,8 @@ public class ResultObj {
 
     private Integer code;
     private String msg;
+
+
+
+
 }

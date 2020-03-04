@@ -1,6 +1,6 @@
 package com.sxt.sys.service.impl;
 
-import com.sxt.sys.pojo.SysDept;
+import com.sxt.sys.domain.SysDept;
 import com.sxt.sys.mapper.SysDeptMapper;
 import com.sxt.sys.service.ISysDeptService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

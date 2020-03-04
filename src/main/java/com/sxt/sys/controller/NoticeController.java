@@ -18,11 +18,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author myq
@@ -33,11 +35,12 @@ import java.util.Date;
 public class NoticeController {
     @Autowired
     private NoticeService noticeService;
+
     /**
      * 查询公告
      */
     @RequestMapping("loadAllNotice")
-    public DataGridView loadAllNotice(NoticeVo noticeVo){
+    public DataGridView loadAllNotice(NoticeVo noticeVo) {
         IPage<Notice> page = new Page<>(noticeVo.getPage(), noticeVo.getLimit());
         QueryWrapper<Notice> queryWrapper = new QueryWrapper<>();
         queryWrapper.like(StringUtils.isNotBlank(noticeVo.getTitle()), "title", noticeVo.getTitle());
@@ -46,7 +49,7 @@ public class NoticeController {
         queryWrapper.le(noticeVo.getEndTime() != null, "createtime", noticeVo.getEndTime());
         queryWrapper.orderByDesc("createtime");
         this.noticeService.page(page, queryWrapper);
-        return new DataGridView( page.getTotal(),page.getRecords());
+        return new DataGridView(page.getTotal(), page.getRecords());
     }
 
 
@@ -54,7 +57,7 @@ public class NoticeController {
      * 添加
      */
     @RequestMapping("addNotice")
-    public ResultObj addNotice(NoticeVo noticeVo){
+    public ResultObj addNotice(NoticeVo noticeVo) {
         try {
             noticeVo.setCreatetime(new Date());
             User user = (User) WebUtils.getSession().getAttribute("user");
@@ -66,18 +69,50 @@ public class NoticeController {
             return ResultObj.ADD_ERROR;
         }
     }
+
+
+
     /**
      * 修改
      */
     @RequestMapping("updateNotice")
-    public ResultObj updateNotice(NoticeVo noticeVo){
+    public ResultObj updateNotice(NoticeVo noticeVo) {
         try {
-
             this.noticeService.updateById(noticeVo);
             return ResultObj.UPDATE_SUCCESS;
         } catch (Exception e) {
             e.printStackTrace();
             return ResultObj.UPDATE_ERROR;
+        }
+    }
+    /**
+     * 删除
+     */
+    @RequestMapping("deleteNotice")
+    public ResultObj deleteNotice(Integer id) {
+        try {
+            this.noticeService.removeById(id);
+            return ResultObj.DELETE_SUCCESS;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResultObj.DELETE_ERROR;
+        }
+    }
+    /**
+     * 批量删除
+     */
+    @RequestMapping("batchDeleteNotice")
+    public ResultObj batchDeleteNotice(NoticeVo noticeVo) {
+        try {
+            ArrayList<Serializable> idList = new ArrayList<>();
+            for(Integer id:noticeVo.getIds()){
+                idList.add(id);
+            }
+            this.noticeService.removeByIds(idList);
+            return ResultObj.DELETE_SUCCESS;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResultObj.DELETE_ERROR;
         }
     }
 
