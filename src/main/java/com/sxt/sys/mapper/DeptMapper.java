@@ -1,6 +1,6 @@
 package com.sxt.sys.mapper;
 
-import com.sxt.sys.domain.SysDept;
+import com.sxt.sys.domain.Dept;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author myq
  * @since 2020-02-28
  */
-public interface SysDeptMapper extends BaseMapper<SysDept> {
+public interface DeptMapper extends BaseMapper<Dept> {
 
 }

@@ -7,6 +7,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
+import java.util.Date;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -23,7 +25,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("sys_dept")
-public class SysDept extends Model<SysDept> {
+public class Dept extends Model<Dept> {
 
     private static final long serialVersionUID = 1L;
 
@@ -58,7 +60,7 @@ public class SysDept extends Model<SysDept> {
     private Integer ordernum;
 
     @TableField("createtime")
-    private LocalDateTime createtime;
+    private Date createtime;
 
 
     @Override

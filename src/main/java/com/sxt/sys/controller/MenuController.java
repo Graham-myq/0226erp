@@ -40,7 +40,7 @@ public class MenuController {
             //根据用户ID+角色+权限去查询
             list = permissionService.list(queryWrapper);
         }
-        ArrayList<TreenNode> treenNodes = new ArrayList<>();
+        ArrayList<TreeNode> treeNodes = new ArrayList<>();
         for (Permission p : list) {
             Integer id = p.getId();
             Integer pid = p.getPid();
@@ -48,10 +48,10 @@ public class MenuController {
             String icon = p.getIcon();
             String href = p.getHref();
             Boolean spread = p.getOpen()==Constast.OPEN_TRUE?true:false;
-            treenNodes.add(new TreenNode(id,pid,title,icon,href,spread));
+            treeNodes.add(new TreeNode(id,pid,title,icon,href,spread));
         }
         //构造层级关系
-        List<TreenNode> list2 = TreenNodeBuilder.build(treenNodes, 1);
+        List<TreeNode> list2 = TreenNodeBuilder.build(treeNodes, 1);
         return new DataGridView(list2);
     }
 }
