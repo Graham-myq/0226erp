@@ -10,11 +10,11 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
-    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" href="/resources/favicon.ico">
     <link rel="stylesheet" href="/resources/layui/css/layui.css" media="all"/>
     <link rel="stylesheet" href="/resources/css/public.css" media="all"/>
-    <link rel="stylesheet" href="/layui_ext/dtree/dtree.css" media="all"/>
-    <link rel="stylesheet" href="/layui_ext/dtree/font/dtreefont.css" media="all"/>
+    <link rel="stylesheet" href="/resources/layui_ext/dtree/dtree.css" media="all"/>
+    <link rel="stylesheet" href="/resources/layui_ext/dtree/font/dtreefont.css" media="all"/>
 </head>
 <body>
 <ul id="deptTree" class="dtree" data-id="0"></ul>
@@ -23,7 +23,7 @@
 <script type="text/javascript">
     var deptTree;
     layui.extend({
-        dtree: '/layui_ext/dtree/dtree'   // {/}的意思即代表采用自有路径，即不跟随 base 路径
+        dtree: '/resources/layui_ext/dtree/dtree'   // {/}的意思即代表采用自有路径，即不跟随 base 路径
     }).use(['dtree', 'layer', 'jquery'], function () {
         var dtree = layui.dtree;
         var layer = layui.layer;

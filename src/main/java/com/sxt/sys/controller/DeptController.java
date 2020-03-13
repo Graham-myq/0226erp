@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sxt.sys.common.DataGridView;
+import com.sxt.sys.common.ResultObj;
 import com.sxt.sys.common.TreeNode;
 import com.sxt.sys.domain.Dept;
 import com.sxt.sys.domain.Dept;
@@ -13,12 +14,12 @@ import com.sxt.sys.vo.DeptVo;
 import com.sxt.sys.vo.DeptVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * <p>
@@ -65,4 +66,82 @@ public class DeptController {
         return new DataGridView(page.getTotal(), page.getRecords());
     }
 
+    /**
+     * 加载最大的排序码
+     */
+    @RequestMapping("loadDeptMaxOrderNum")
+    public Map<String, Object> loadDeptMaxOrderNum(DeptVo deptVo) {
+        HashMap<String, Object> map = new HashMap<>();
+        QueryWrapper<Dept> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByDesc("ordernum");
+        IPage<Dept> page = new Page<>(1, 1);
+        List<Dept> list = this.deptService.page(page, queryWrapper).getRecords();
+        if (list.size() > 0) {
+            map.put("value", list.get(0).getOrdernum() + 1);
+        } else {
+            map.put("value", 1);
+        }
+        return map;
+    }
+
+    /**
+     * 添加公告
+     */
+    @RequestMapping("addDept")
+    public ResultObj addDept(DeptVo deptVo) {
+        try {
+            deptVo.setCreatetime(new Date());
+            this.deptService.save(deptVo);
+            return ResultObj.ADD_SUCCESS;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResultObj.ADD_ERROR;
+        }
+    }
+
+    /**
+     * 修改公告
+     */
+    @RequestMapping("updateDept")
+    public ResultObj updateDept(DeptVo deptVo) {
+        try {
+            this.deptService.updateById(deptVo);
+            return ResultObj.UPDATE_SUCCESS;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResultObj.UPDATE_ERROR;
+        }
+    }
+
+    /**
+     * 检查当前的ID的部门有没有子部门
+     */
+    @RequestMapping("checkDeptHasChildrenNode")
+    public Map<String, Object> checkDeptHasChildrenNode(DeptVo deptVo) {
+        HashMap<String, Object> map = new HashMap<>();
+        QueryWrapper<Dept> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("pid",deptVo.getId());
+        List<Dept> list = this.deptService.list(queryWrapper);
+        if (list.size() > 0) {
+            map.put("value", true);
+        } else {
+            map.put("value", false);
+        }
+        return map;
+    }
+
+
+    /**
+     * 删除公告
+     */
+    @RequestMapping("deleteDept")
+    public ResultObj deleteDept(DeptVo deptVo) {
+        try {
+            this.deptService.removeById(deptVo);
+            return ResultObj.DELETE_SUCCESS;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResultObj.DELETE_ERROR;
+        }
+    }
 }
