@@ -151,4 +151,15 @@ public class SystemController {
 
         return "system/permission/permissionRight";
     }
+
+    /**
+     * 跳转到角色管理
+     *
+     * @return
+     */
+    @RequestMapping("toRoleManager")
+    public String toRoleManager() {
+
+        return "system/role/roleManager";
+    }
 }

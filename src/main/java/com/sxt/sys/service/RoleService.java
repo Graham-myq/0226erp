@@ -1,7 +1,9 @@
 package com.sxt.sys.service;
 
-import com.sxt.sys.pojo.SysRole;
+import com.sxt.sys.domain.Role;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.io.Serializable;
 
 /**
  * <p>
@@ -11,6 +13,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author myq
  * @since 2020-02-28
  */
-public interface ISysRoleService extends IService<SysRole> {
+public interface RoleService extends IService<Role> {
+
+
+
+
 
 }

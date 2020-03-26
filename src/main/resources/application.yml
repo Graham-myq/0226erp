@@ -2,6 +2,10 @@
 server:
   port: 8090
 #配置数据源的属性
+
+
+
+#配置数据源的属性
 spring:
   datasource:
     druid:
@@ -15,11 +19,11 @@ spring:
       filters: stat,log4j,wall
       validationQuery: SELECT 'x'   #验证连接
       enable: true
-   #监控配置
+      #监控配置
       stat-view-servlet:
         enabled: true
         login-username: root
-        login-password: root
+        login-password: 123456
         allow:
         deny:
         url-pattern: /druid/*
@@ -27,34 +31,36 @@ spring:
   thymeleaf:
     cache: false
     enabled: true
-#      web-stat-filter:
-#        enabled: true
-#        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
+  #      web-stat-filter:
+  #        enabled: true
+  #        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
 
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
+#  aop:
+#    proxy-target-class: true
 #配置mybatisplus
 mybatis-plus:
   mapper-locations:
-  - classpath:mapper/*/*Mapper.xml
+    - classpath:mapper/*/*Mapper.xml
   global-config:
     db-config:
       id-type: auto
     banner: true
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 #shiro的配置
 shiro:
   hash-algorithm-name: md5
   hash-iterations: 2
   anon-urls:
-  - /index.html*
-  - /sys/toLogin*
-  - /login/login*
-  - /resources/**
+    - /index.html*
+    - /sys/toLogin*
+    - /login/login*
+    - /resources/**
   login-url: /index.html
   log-out-url: /login/logout*
   authc-ulrs:
-  - /**
+    - /**

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxt.sys.mapper.RoleMapper">
+
+
+
+
+<!--根据角色ID删除sys_role_permission-->
+<delete id="deleteRolePermissionByRid">
+delete from sys_role_permission where rid=#{value}
+</delete>
+<!--根据角色ID删除sys_role_user-->
+<delete id="deleteRoleUserByRid">
+delete from sys_role_user where rid=#{value}
+</delete>
+<!-- 通用查询映射结果 -->
+<resultMap id="BaseResultMap" type="com.sxt.sys.domain.Role">
+<id column="id" property="id" />
+<result column="name" property="name" />
+<result column="remark" property="remark" />
+<result column="available" property="available" />
+<result column="createtime" property="createtime" />
+</resultMap>
+
+</mapper>
